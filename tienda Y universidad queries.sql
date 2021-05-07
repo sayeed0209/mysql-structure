@@ -42,7 +42,7 @@ SELECT * FROM producto  JOIN fabricante  ON producto.codigo_fabricante = fabrica
  SELECT * FROM persona JOIN curso_escolar JOIN asignatura ON asignatura.id= curso_escolar.id WHERE  persona.nif ='26902806M';
  SELECT * FROM profesor JOIN persona  JOIN grado JOIN departamento ON persona.id = profesor.id_profesor WHERE grado.nombre='Grado en Ingeniería Informática (Plan 2015)' GROUP BY persona.id;
  SELECT * FROM persona JOIN alumno_se_matricula_asignatura JOIN curso_escolar ON persona.id = alumno_se_matricula_asignatura.id_alumno WHERE anyo_inicio=2018 AND anyo_fin =2019 GROUP BY persona.id;
- Resuelva las 6 siguientes consultas utilizando las cláusulas LEFT JOIN y RIGHT JOIN. 
+ -- Resuelva las 6 siguientes consultas utilizando las cláusulas LEFT JOIN y RIGHT JOIN. 
  SELECT departamento.nombre,persona.apellido1,persona.apellido2,persona.nombre FROM persona LEFT JOIN profesor ON persona.id = profesor.id_profesor LEFT JOIN departamento ON departamento.id = profesor.id_departamento ORDER BY departamento.nombre ;
  SELECT profesor.id_profesor,persona.nombre,departamento.nombre AS departamento FROM profesor LEFT JOIN departamento ON profesor.id_profesor = departamento.id  LEFT JOIN persona ON persona.id = profesor.id_profesor WHERE departamento.nombre IS NULL;
  SELECT departamento.nombre FROM profesor RIGHT JOIN departamento ON profesor.id_departamento = departamento.id WHERE id_profesor IS NULL ;

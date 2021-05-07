@@ -55,5 +55,9 @@ SELECT * FROM producto  JOIN fabricante  ON producto.codigo_fabricante = fabrica
  SELECT COUNT(*) AS total_alumno FROM persona WHERE tipo='alumno';
  SELECT COUNT(*) AS nacieron_en_1999 FROM persona WHERE tipo = 'alumno' AND  fecha_nacimiento BETWEEN '1999-01-01' AND '1999-12-31';
  SELECT departamento.nombre,count(profesor.id_profesor)AS total_profesor FROM departamento  JOIN profesor ON departamento.id= profesor.id_departamento group by departamento.nombre;
+ SELECT  grado.nombre  , COUNT(*) FROM asignatura RIGHT JOIN grado ON grado.id = asignatura.id_grado group by grado.nombre;
+ SELECT  grado.nombre  , COUNT(*)  FROM asignatura RIGHT JOIN grado ON grado.id = asignatura.id_grado GROUP BY grado.nombre HAVING COUNT(*)> 40 ;
+ SELECT grado.nombre,asignatura.tipo ,COUNT(asignatura.creditos) FROM grado JOIN asignatura ON grado.id = asignatura.id_grado group by asignatura.tipo;
+SELECT curso_escolar.anyo_inicio ,COUNT(alumno_se_matricula_asignatura.id_alumno) FROM alumno_se_matricula_asignatura JOIN asignatura ON alumno_se_matricula_asignatura.id_alumno = asignatura.id JOIN curso_escolar group by id_alumno
 
 	

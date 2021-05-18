@@ -44,11 +44,12 @@ tipo_de_montura_id INT,
 color_de_la_montura VARCHAR(50),
 color_de_cristal VARCHAR(50),
 precio  DECIMAL(5,2),
-proveedor_id INT,
-FOREIGN KEY(tipo_de_montura_id ) REFERENCES tipos_de_monturas(tipo_de_montura_id),
-FOREIGN KEY(proveedor_id ) REFERENCES proveedores(proveedor_id)
-
+proveedor_id INT
+-- FOREIGN KEY(tipo_de_montura_id ) REFERENCES tipos_de_monturas(tipo_de_montura_id),
+-- FOREIGN KEY(proveedor_id ) REFERENCES proveedores(proveedor_id)
 );
+
+
 
 INSERT INTO `gafas` (`gafas_id`, `la_marca`, `la_graduacion`, `tipo_de_montura_id`, `color_de_la_montura`, `color_de_cristal`, `precio`,`proveedor_id`) VALUES
 (1, 'ray ban', '-4.5', 1, 'Rojo', 'Negro', '132.22',1),
@@ -89,12 +90,18 @@ client_id INT,
 recomendado_id INT,
 empleado_id INT,
 gafas_id INT,
-fetcha_de_registro DATETIME NOT NULL DEFAULT NOW(),
-FOREIGN KEY(client_id) REFERENCES clientes(client_id),
-FOREIGN KEY(recomendado_id) REFERENCES empleados(empleado_id),
-FOREIGN KEY(empleado_id) REFERENCES empleados(empleado_id),
-FOREIGN KEY(gafas_id) REFERENCES gafas(gafas_id)
+fetcha_de_registro DATETIME NOT NULL DEFAULT NOW()
+-- FOREIGN KEY(client_id) REFERENCES clientes(client_id),
+-- FOREIGN KEY(recomendado_id) REFERENCES empleados(empleado_id),
+-- FOREIGN KEY(empleado_id) REFERENCES empleados(empleado_id),
+-- FOREIGN KEY(gafas_id) REFERENCES gafas(gafas_id)
 );
+ALTER TABLE gafas ADD FOREIGN KEY(tipo_de_montura_id ) REFERENCES tipos_de_monturas(tipo_de_montura_id);
+ALTER TABLE gafas ADD FOREIGN KEY(proveedor_id ) REFERENCES proveedores(proveedor_id);
+ALTER TABLE facturas ADD FOREIGN KEY(client_id) REFERENCES clientes(client_id);
+ALTER TABLE facturas ADD FOREIGN KEY(recomendado_id) REFERENCES empleados(empleado_id);
+ALTER TABLE facturas ADD FOREIGN KEY(empleado_id) REFERENCES empleados(empleado_id);
+ALTER TABLE facturas ADD FOREIGN KEY(gafas_id) REFERENCES gafas(gafas_id);
 
 INSERT INTO `facturas` (`fuctura_id`, `client_id`, `recomendado_id`, `empleado_id`,`gafas_id`,`fetcha_de_registro`) VALUES
 (1, 1, 2, 2,1,'2021-05-01 15:29:04'),
@@ -121,6 +128,9 @@ JOIN gafas
 ON gafas.proveedor_id = proveedores.proveedor_id
 JOIN facturas
 ON gafas.gafas_id = facturas.gafas_id
+
+
+
 
 
 
